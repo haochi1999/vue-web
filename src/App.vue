@@ -1,21 +1,63 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div class="container">
+    <nav-bar :items="allNavItems" :value="navItem" @input="changeNavItem"/>
+    <app-main />  
+  </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<script>
+  import NavBar from '@/components/NavBar.vue';
+  import AppMain from '@/components/AppMain.vue';
+  import {ref, reactive} from 'vue';
+
+  export default {
+    components: {
+      NavBar,
+      AppMain
+    },
+
+    data() {
+      return {
+        navItem: 'home',
+      };
+    },
+
+    setup() {
+      const allNavItems = reactive([
+        {navItem: 'home', text: '首页'},
+        {navItem: 'record', text: '记录'},
+        {navItem: 'about', text: '其他'},
+      ]);
+      const navItem = ref('home');
+
+      return {
+        allNavItems
+      };
+    },
+
+    methods: {
+      changeNavItem(navItem) {
+        if (this.$route.name !== navItem) {
+          this.navItem = navItem;
+          this.$router.push({name: navItem});
+        }
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
+  @import "@/styles/base";
+  @import "@/styles/layout";
+  @import "@/styles/element";
+  @import "@/styles/loading.css";
+
+  #app {
+    width: 100%;
+    height: 100%;
+
+    /* https://zh.learnlayout.com/box-sizing.html */
+    box-sizing: border-box;
+    position: relative;
+  }
 </style>

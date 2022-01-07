@@ -1,0 +1,165 @@
+@import "config";
+@import "base";
+
+
+.flex {
+  display: flex;
+  min-width: 0;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
+  &.no-wrap {
+    flex-wrap: nowrap;
+  }
+
+  &.top {
+    align-items: flex-start;
+    align-content: flex-start;
+  }
+
+  &.bottom {
+    align-items: flex-end;
+    align-content: flex-end;
+  }
+
+  &.middle {
+    align-items: center;
+    align-content: center;
+  }
+
+  &.left {
+    justify-content: flex-start;
+  }
+
+  &.center {
+    justify-content: center;
+  }
+
+  &.right {
+    justify-content: flex-end;
+  }
+
+  &.spread {
+    justify-content: space-between;
+  }
+
+  &.balance {
+    justify-content: space-around;
+  }
+
+  &.stretch {
+    align-items: stretch;
+    align-content: stretch;
+  }
+
+  &.vertical {
+    flex-direction: column;
+  }
+
+  &.fluid {
+    flex-grow: 1;
+  }
+
+  &.fixed {
+    flex-shrink: 0;
+  }
+
+  &.full {
+    flex-basis: 100%;
+  }
+
+  &.half-width {
+    flex-basis: 50%;
+  }
+}
+
+
+.container {
+  @extend .flex;
+  @extend .center;
+  @extend .top;
+  @extend .wrap;
+  @extend .background-shade;
+  min-height: 100%;
+  min-width: 19.2rem;
+}
+
+
+.content {
+  max-width: 19.2rem;
+}
+
+.section {
+  @extend .flex;
+  @extend .fluid;
+  @extend .full;
+  
+  &.vertical {
+    @extend .top;
+  }
+
+  &:not(.simple) {
+    @extend .round-normal;
+    @extend .background-white;
+  }
+}
+
+
+.field {
+  @extend .flex;
+
+  &:not(.vertical) {
+    @extend .middle;
+  }
+
+  &.vertical {
+    @extend .center;
+    @extend .top;
+  }
+}
+
+
+.grid {
+  display: grid;
+  flex-grow: 1;
+  
+  &.left {
+    justify-items: start;
+  }
+  
+  &.center {
+    justify-items: center;
+  }
+
+  &.right {
+    justify-items: end;
+  }
+  
+  &.top {
+    align-items: start;
+  }
+
+  &.middle {
+    align-items: center;
+  }
+
+  &.bottom {
+    align-items: end;
+  }
+  
+  &.spread {
+    justify-items: stretch;
+  }
+  
+  &.stretch {
+    align-items: stretch;
+  }
+  
+}

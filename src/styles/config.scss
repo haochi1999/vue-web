@@ -1,0 +1,128 @@
+$padding: (
+        "horizontal": (
+                "none": 0,
+                "micro": 0.05rem,
+                "compact": 0.1rem,
+                "small": 0.15rem,
+                "normal": 0.2rem,
+                "loose": 0.25rem
+        ),
+        "vertical": (
+                "none": 0,
+                "micro": 0.05rem,
+                "compact": 0.1rem,
+                "small": 0.15rem,
+                "normal": 0.2rem,
+                "loose": 0.25rem
+        )
+);
+
+$width: (
+        "none": 0,
+        "icon-micro": 0.2rem,
+        "icon-mini": 0.25rem,
+        "icon-small": 0.35rem,
+        "icon": 0.5rem,
+        "icon-large": 0.6rem,
+        "icon-huge": 0.8rem,
+        "card-mini": 1.5rem,
+        "card-small": 2rem, 
+        "card": 2.96rem, 
+        "card-large": 3.4rem,
+        "card-square-mini": 1.5rem,
+        "card-square-small": 2rem,
+        "card-square": 2.96rem,
+        "card-square-large": 3.4rem,
+        "full": 100%
+);
+
+$height: (
+        "none": 0,
+        "icon-micro": 0.2rem,
+        "icon-mini": 0.25rem,
+        "icon-small": 0.35rem,
+        "icon": 0.5rem,
+        "icon-large": 0.6rem,
+        "icon-huge": 0.8rem,
+        "card-mini": 1.2rem,
+        "card-small": 1.5rem, 
+        "card": 2.22rem, 
+        "card-large": 2.55rem,
+        "card-square-mini": 1.5rem,
+        "card-square-small": 2rem,
+        "card-square": 2.96rem,
+        "card-square-large": 3.4rem,
+        "full": 100%
+);
+
+$font-size: (
+        "micro": 0.12rem,
+        "small": 0.16rem,
+        "normal": 0.18667rem,
+        "header": 0.21rem,
+        "large": 0.26rem,
+        "huge": 0.4rem
+);
+
+$color: (
+        "primary": #5286ff,
+        "success": #52c41a,
+        "alert": #ff5447,
+        "warn": #faad14,
+        "letter": #262626,
+        "white": #ffffff,
+        "light": #fafafa,
+        "shade": #f5f5f5,
+        "gray": #9b9b9b,
+        "black": #000000,
+        "green": #52c41a,
+        "blue": #2962ff,
+        "orange": #faad14,
+        "purple": #5041fb,
+        "pink": #ff6e70,
+        "blur": #d4d4d4,
+);
+
+$opacity: (
+        "secondary": 0.65,
+        "minor": 0.4,
+        "trivial": 0.2,
+);
+
+$border: (
+        "primary": map_get($color, "primary") 1px solid,
+        "success": map_get($color, "success") 1px solid,
+        "alert": map_get($color, "alert") 1px solid,
+        "warn": map_get($color, "warn") 1px solid,
+        "letter": map_get($color, "letter") 1px solid,
+        "white": map_get($color, "white") 1px solid,
+        "light": map_get($color, "light") 1px solid,
+        "shade": map_get($color, "shade") 1px solid,
+        "gray": map_get($color, "gray") 1px solid,
+        "black": map_get($color, "black") 1px solid,
+        "green": map_get($color, "green") 1px solid,
+        "blue": map_get($color, "blue") 1px solid,
+        "orange": map_get($color, "orange") 1px solid,
+        "purple": map_get($color, "purple") 1px solid,
+        "pink": map_get($color, "pink") 1px solid,
+        "blur": map_get($color, "blur") 1px solid,
+        "indicator": map_get($color, "primary") 0.025rem solid,
+        "none": 0,
+);
+
+$border-radius: (
+        "small": 0.05333rem,
+        "normal": 0.10667rem,
+        "large": 0.3rem,
+        "full": 50%,
+        "none": 0,
+);
+
+$box-shadow: (
+        "normal": 0 0 0.1rem 0 rgba(map_get($color, "gray"), 0.5),
+        "black": 0 0 0.1rem 0 rgba(map_get($color, "black"), 0.5),
+        "primary": 0 0 0.1rem 0 rgba(map_get($color, "primary"), 0.5),
+        "none": none,
+);
+
+$banner: linear-gradient(-15deg, rgb(141, 172, 140) 0%, rgba(141, 172, 198) 100%);

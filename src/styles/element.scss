@@ -1,0 +1,221 @@
+@import "config";
+@import "layout";
+
+
+.text {
+  color: rgba(map_get($color, "letter"), map_get($opacity, "secondary"));
+  font-size: map_get($font-size, "normal");
+
+  @each $name, $value in $font-size {
+    &.#{$name} {
+      font-size: $value;
+    }
+  }
+
+  &.bold {
+    font-weight: bold;
+  }
+  
+  &.emphasis {
+    color: map_get($color, "letter");
+  }
+
+  &.minor {
+    color: rgba(map_get($color, "letter"), map_get($opacity, "minor"));
+  }
+  
+  &.trivial {
+    color: rgba(map_get($color, "letter"), map_get($opacity, "trivial"));
+  }
+
+  @each $name, $value in $color {
+    &.#{$name}:not(input):not(textarea) {
+      color: $value;
+    }
+    
+    @each $name2, $value2 in $opacity {
+      &.#{$name}-#{$name2} {
+        color: rgba($value, $value2);
+      }
+    }
+  }
+
+  &.left {
+    text-align: left;
+  }
+
+  &.center {
+    text-align: center;
+  }
+
+  &.right {
+    text-align: right;
+  }
+}
+
+a {
+  text-decoration: none;
+  @extend .pointer;
+}
+
+textarea {
+  appearance: none;
+  resize: none;
+  outline: 0;
+
+  &.input {
+    @extend .round-small;
+    @extend .text;
+    @extend .small;
+    
+    &.form {
+      @extend .padding-micro;
+      @extend .bordered-blur;
+
+      &:focus {
+        @extend .bordered-primary;
+      }
+
+      &.warn {
+        @extend .bordered-warn;
+      }
+    } 
+  }
+}
+
+input {
+  appearance: none;
+  outline: 0;
+
+  &:disabled {
+    opacity: .5;
+  }
+
+  &::placeholder {
+    @extend .text;
+    @extend .minor;
+  }
+
+  &.input {
+    @extend .flex;
+    @extend .full;
+    @extend .text;
+
+    &.primary {
+      @extend .bordered-primary;
+      @extend .padding-small;
+      @extend .round-small;
+    }
+
+    &.form {
+      @extend .padding-compact;
+      @extend .bordered-blur;
+      @extend .round-small;
+
+      &:focus {
+        @extend .bordered-primary;
+      }
+
+      &::placeholder {
+        @extend .small;
+      }
+
+      &.has-icon {
+        background-repeat: no-repeat;
+        background-position: .05rem;
+        text-indent: .35rem; 
+      }
+      
+      &.warn {
+        @extend .bordered-warn;
+      }
+    }
+  }
+}
+
+.button {
+  @extend .field;
+  @extend .center;
+  @extend .padding-compact;
+  @extend .round-small;
+  min-width: 1rem;
+  
+  &:not(:disabled):not([disabled]) {
+    @extend .pointer;
+    @extend .active-shade-black;
+  }
+
+  @each $name, $value in $color {
+    &.#{$name} {
+      @extend .background-#{$name};
+      @extend .bordered-#{$name};
+    }
+  }
+
+  @each $name, $value in $box-shadow {
+    &.active-shade-#{$name} {
+      &:hover:not(:disabled):not([disabled]), &.active {
+        @extend .shade-#{$name};
+      }
+    }
+  }
+
+  &.disabled {
+    opacity: .7;
+  }
+
+  &.secondary {
+    @extend .bordered-gray;
+    @extend .background-white;
+    @extend .active-shade-normal;
+
+    &.disabled {
+      opacity: .5;
+    }
+  }
+}
+
+.tag {
+  @extend .field;
+  @extend .center;
+  @extend .padding-horizontal-compact;
+  @extend .padding-vertical-micro;
+  @extend .round-large;
+}
+
+.search-box {
+  @extend .field;
+  @extend .full;
+  @extend .stretch;
+  @extend .no-wrap;
+  @extend .bordered-primary;
+  @extend .round-large;
+  @extend .overflow-hidden;
+
+  input {
+    @extend .input;
+    @extend .bordered-none;
+    @extend .padding-horizontal;
+    @extend .round-small;
+  }
+
+  .button {
+    @extend .bordered-none;
+    @extend .round-none;
+    @extend .center;
+    @extend .padding-micro;
+    @extend .active-shade-none;
+  }
+}
+
+.transparent {
+  opacity: 0;
+}
+
+.display-none {
+  display: none;
+}
+
+.pointer {
+  cursor: pointer;
+}

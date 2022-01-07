@@ -1,0 +1,255 @@
+@import "config";
+
+
+@each $direction in left, right, top, bottom {
+
+  $padding-map: map_get($padding, "horizontal");
+  @if $direction == top or $direction == bottom {
+    $padding-map: map_get($padding, "vertical");
+  }
+
+
+  .padding-#{$direction} {
+
+    $value: map_get($padding-map, "normal");
+
+    padding-#{$direction}: $value;
+
+    &-parent {
+      padding-#{$direction}: $value * 1.5;
+    }
+
+    &-child {
+      padding-#{$direction}: $value / 2;
+    }
+
+    @each $name, $value in $padding-map {
+
+      &-#{$name} {
+        padding-#{$direction}: $value;
+      }
+
+      &-parent-#{$name} {
+        padding-#{$direction}: $value * 1.5;
+      }
+
+      &-child-#{$name} {
+        padding-#{$direction}: $value / 2;
+      }
+
+      @each $inner-name, $inner-value in $padding-map {
+        @if $value > $inner-value {
+          &-#{$name}-#{$inner-name} {
+            padding-#{$direction}: $value - $inner-value;
+          }
+        }
+      }
+
+    }
+
+  }
+}
+
+
+@each $angle, $directions in ("horizontal": ("left", "right"), "vertical": ("top", "bottom")) {
+
+  .padding-#{$angle} {
+    @each $direction in $directions {
+      @extend .padding-#{$direction};
+    }
+
+    &-parent {
+      @each $direction in $directions {
+        @extend .padding-#{$direction}-parent;
+      }
+    }
+
+    &-child {
+      @each $direction in $directions {
+        @extend .padding-#{$direction}-child;
+      }
+    }
+
+    $padding-map: map_get($padding, $angle);
+
+    @each $name, $value in $padding-map {
+      &-#{$name} {
+        @each $direction in $directions {
+          @extend .padding-#{$direction}-#{$name};
+        }
+      }
+
+      &-parent-#{$name} {
+        @each $direction in $directions {
+          @extend .padding-#{$direction}-parent-#{$name};
+        }
+      }
+
+      &-child-#{$name} {
+        @each $direction in $directions {
+          @extend .padding-#{$direction}-child-#{$name};
+        }
+      }
+
+      @each $inner-name, $inner-value in $padding-map {
+        @if $value > $inner-value {
+          &-#{$name}-#{$inner-name} {
+            @each $direction in $directions {
+              @extend .padding-#{$direction}-#{$name}-#{$inner-name};
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.padding {
+  $directions: ("horizontal", "vertical");
+
+  @each $direction in $directions {
+    @extend .padding-#{$direction};
+  }
+
+  &-parent {
+    @each $direction in $directions {
+      @extend .padding-#{$direction}-parent;
+    }
+  }
+
+  &-child {
+    @each $direction in $directions {
+      @extend .padding-#{$direction}-child;
+    }
+  }
+
+  @each $name, $value in map_get($padding, "horizontal") {
+    &-#{$name} {
+      @each $direction in $directions {
+        @extend .padding-#{$direction}-#{$name};
+      }
+    }
+
+    &-parent-#{$name} {
+      @each $direction in $directions {
+        @extend .padding-#{$direction}-parent-#{$name};
+      }
+    }
+
+    &-child-#{$name} {
+      @each $direction in $directions {
+        @extend .padding-#{$direction}-child-#{$name};
+      }
+    }
+
+    @each $inner-name, $inner-value in map_get($padding, "horizontal") {
+      @if $value > $inner-value {
+        &-#{$name}-#{$inner-name} {
+          @each $direction in $directions {
+            @extend .padding-#{$direction}-#{$name}-#{$inner-name};
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@each $name, $value in $width {
+  .width-#{$name} {
+    width: $value;
+  }
+}
+
+@each $name, $value in $height {
+  .height-#{$name} {
+    height: $value;
+  }
+}
+
+@each $name, $value in $width {
+  .size-#{$name} {
+    @extend .width-#{$name};
+    @extend .height-#{$name};
+  }
+}
+
+
+@each $direction in left, right, top, bottom {
+  @each $name, $value in $border {
+    .bordered-#{$direction}-#{$name} {
+      border-#{$direction}: $value;
+    }
+  }
+}
+
+@each $name, $value in $border {
+  .bordered-#{$name} {
+    @each $direction in left, right, top, bottom {
+      @extend .bordered-#{$direction}-#{$name};
+    }
+  }
+}
+
+@each $name, $value in $color {
+  .background-#{$name}, .hover-background-#{$name}:hover {
+    background-color: $value;
+  }
+
+  @each $name2, $value2 in $opacity {
+    .background-#{$name}-#{$name2}, .hover-background-#{$name}-#{$name2}:hover {
+      background-color: rgba($value, $value2);
+    }
+  }
+}
+
+.background-banner {
+  background-image: $banner;
+}
+
+.has-background-image {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.has-background-image-high {
+  @extend .has-background-image;
+  background-position: 50% 20%;
+}
+
+@each $name, $value in $border-radius {
+  .round-#{$name} {
+    border-radius: $value;
+  }
+}
+
+
+@each $name, $value in $box-shadow {
+  .shade-#{$name} {
+    box-shadow: $value;
+  }
+}
+
+.overflow-hidden {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  @for $i from 2 through 10 {
+    &-#{$i} {
+      display: -webkit-box;
+      -webkit-line-clamp: $i;
+      -webkit-box-orient: vertical;
+    }
+  }
+}
+
+.full-screen {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 40;
+}
