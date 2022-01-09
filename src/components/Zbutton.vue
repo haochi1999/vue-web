@@ -21,11 +21,13 @@
 
 <script>
   import {Loading} from '@element-plus/icons-vue';
+  import {ElIcon} from 'element-plus';
 
   export default {
     name: 'zButton',
 
     components: {
+      ElIcon,
       Loading
     },
 
