@@ -8,7 +8,8 @@
 <script>
   import NavBar from '@/components/NavBar.vue';
   import AppMain from '@/components/AppMain.vue';
-  import {ref, reactive} from 'vue';
+
+  import {ref, reactive, onMounted} from 'vue';
 
   export default {
     components: {
@@ -18,7 +19,7 @@
 
     data() {
       return {
-        navItem: 'home',
+        navItem: this.$route.name || '',
       };
     },
 
@@ -28,10 +29,8 @@
         {navItem: 'record', text: '记录'},
         {navItem: 'about', text: '其他'},
       ]);
-      const navItem = ref('home');
-
       return {
-        allNavItems
+        allNavItems,
       };
     },
 
