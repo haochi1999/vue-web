@@ -29,21 +29,39 @@
       <z-card class="field center text card" shadow="never">不显示</z-card>
     </div>
   </div>
+  <div class="flex full">
+    <div class="field padding text">Input</div>
+    <div class="padding">
+      <z-input v-model="inputValue" label="姓名：" placeholder="请输入" size="small" maxlength="100" show-limit-word></z-input>
+    </div>
+    <div class="padding">
+      <z-input placeholder="请输入" disabled maxlength="10" show-limit-word></z-input>
+    </div>
+    <div class="padding">
+      <z-input placeholder="请输入" size="large" maxlength="10" show-limit-word></z-input>
+    </div>
+    <div class="padding">
+      <z-input label="textarea：" type="textarea" rows="15" cols="50" placeholder="请输入" autosize="none" disabled></z-input>
+    </div>
+  </div>
 </template>
 
 <script>
   import ZButton from '@/components/Zbutton.vue';
   import ZCard from '@/components/ZCard.vue';
+  import ZInput from '@/components/ZInput.vue';
 
   export default {
     components: {
       ZButton,
       ZCard,
+      ZInput,
     },
 
     data() {
       return {
-        loading: true
+        loading: true,
+        inputValue: ''
       };
     },
 
