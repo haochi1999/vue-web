@@ -2,29 +2,32 @@
   <button 
     class="z-button" 
     :class="[
-      size || 'normal',
+      size,
       {
-        [`bordered-${type}`]: type,
-        [`background-${type}`]: type,
-        disabled
+        [`bordered-${type} background-${type}`]: type && type !== 'text',
+        [type]: type && type !== 'text',
+        'text primary z-button-text': type === 'text',
+        'z-button-disabled': disabled || loading,
+        'z-button-plain text': plain,
       },
     ]"
-    :disabled="disabled || loading">
+    :disabled="disabled || loading"
+    @click.self="handleClick">
     <el-icon class="is-loading" v-if="loading">
       <loading></loading>
     </el-icon>
-    <span v-if="$slots.default">
+    <span>
       <slot></slot>
     </span>
   </button>
 </template>
 
 <script>
-  import {Loading} from '@element-plus/icons-vue';
+  import {Bell, Loading} from '@element-plus/icons-vue';
   import {ElIcon} from 'element-plus';
 
   export default {
-    name: 'zButton',
+    name: 'ZButton',
 
     components: {
       ElIcon,
@@ -38,7 +41,14 @@
       },
       type: String,
       disabled: Boolean,
-      loading: Boolean
+      loading: Boolean,
+      plain: Boolean
+    },
+
+    methods: {
+      handleClick(event) {
+        this.$emit('click', event);
+      }
     }
   }
 </script>
@@ -51,10 +61,10 @@
     border-radius: 5px;
     color: white;
   }
-  .z-button:hover:not(.disabled) {
+  .z-button:hover:not(.z-button-disabled) {
     opacity: .8;
   }
-  .z-button.disabled {
+  .z-button.z-button-disabled {
     cursor: not-allowed;
     opacity: .5;
     border: none;
@@ -68,5 +78,14 @@
   }
   .z-button.large {
     padding: 9px 18px;
+  }
+
+  .z-button.z-button-text:not(.plain) {
+    border: none;
+    background: none;
+    padding: 0;
+  }
+  .z-button.z-button-plain {
+    background: none;
   }
 </style>
